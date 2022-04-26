@@ -33,7 +33,7 @@ def getHtml(title):
 
     html = r.content.decode('utf-8').replace('\xa9', '')
 
-    pattern = re.compile("<div class=\"entry-header\">.*?</div></div></div></div>", re.S)
+    pattern = re.compile("<div class=\"entry-header\">(.*?)</div></div></div></div>", re.S)
     html = pattern.findall(html)[0]
 
     return html
