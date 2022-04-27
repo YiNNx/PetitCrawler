@@ -4,14 +4,12 @@
 
 `https://api.bilibili.com/x/v2/reply/main`
 
-params：
-
 ```
-{
-	next=1 //评论分页 从1开始
-	type=1 //就这一个type能用好像
-	oid=768280609 //视频aid
-	mode=3 //3:按热度排序 2：按时间排序
+params = {
+    "oid": "",  # 视频aid
+    "next": "1",  # 评论分页 从1开始
+    "mode": "3",  # 3:按热度排序 2：按时间排序
+    "type": "1",  # 就这一个type能用好像
 }
 ```
 
@@ -22,11 +20,11 @@ params：
 `https://api.bilibili.com/x/space/arc/search`
 
 ```
-{
-	mid=27534330 //up主id
-	ps=30 //条数 max=50
-	pn=6 //页数
-	order=pubdate //按时间排序 click：按播放量排序
+params = {
+    "mid": "27534330",  # up主id
+    "ps": "50",  # 条数 max=50
+    "pn": "1",  # 页数
+    "order": "pubdate",  # 按时间排序 click：按播放量排序
 }
 ```
 
