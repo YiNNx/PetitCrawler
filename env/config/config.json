@@ -1,0 +1,10 @@
+{
+    "DEBUG": true,
+    "JSONIFY_PRETTYPRINT_REGULAR":true,
+    "SQLALCHEMY_DATABASE_URI": "",
+    "SQLALCHEMY_TRACK_MODIFICATIONS": false,
+
+    "mid":"27534330",
+    "likes_min":1000,
+    "likes_stop_look_through":500
+}

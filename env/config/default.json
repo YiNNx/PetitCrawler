@@ -1,0 +1,10 @@
+{
+    "DEBUG": true,
+    "JSONIFY_PRETTYPRINT_REGULAR":true,
+    "SQLALCHEMY_DATABASE_URI": "mysql://root:080502@127.0.0.1:3306/honkai3?charset=utf8mb4",
+    "SQLALCHEMY_TRACK_MODIFICATIONS": false,
+
+    "mid":"27534330",
+    "likes_min":1000,
+    "likes_stop_look_through":500
+}
