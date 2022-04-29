@@ -1,5 +1,9 @@
+import os
 from flask_sqlalchemy import SQLAlchemy
-from app.app import app
+from flask import Flask
+
+app = Flask(__name__)
+app.config.from_json(os.path.join(os.getcwd(), "env","config","default.json"))
 
 db = SQLAlchemy(app)
 
@@ -25,7 +29,7 @@ class Videos(db.Model):
     coin = db.Column(db.Integer)
     share = db.Column(db.Integer)
     like = db.Column(db.Integer)
-
+    
     def insert(self):
         try:
             db.session.add(self)
@@ -38,7 +42,7 @@ class Videos(db.Model):
         video = Videos.query.filter(Videos.aid == aid).first()
         return video
    
-def initVideo(data):
+def addVideo(data):
     if data==None:
         return 
     video=Videos(
@@ -58,8 +62,4 @@ def initVideo(data):
         like = data['stat']['like'],
     )
     print(data['bvid']+"(aid:"+str(data['aid'])+"): "+data['title'])
-    return video
-
-def addVideo(data):
-    video=initVideo(data)
     video.insert()

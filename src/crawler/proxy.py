@@ -9,14 +9,13 @@ def delete_proxy(proxy):
 def getResByProxy(url,headers,params):
     retry_count = 5
     pro = get_proxy().get("proxy")
-    print("proxy:"+pro)
     while retry_count > 0:
         try:
+            print("<proxy:"+pro+">")
             r = requests.get(url, headers=headers, params=params,proxies={"http": "http://{}".format(pro)})
             return r
         except Exception:
             print('oops')
             retry_count -= 1
-    # 删除代理池中代理
     delete_proxy(pro)
     return None

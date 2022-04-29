@@ -30,14 +30,7 @@ class Replies(db.Model):
         return reply
 
 
-def addReply(data_list):
-    if data_list==None:
-        return 
-    for data in data_list:
-        reply=initReply(data)
-        reply.insert()
-
-def initReply(data):
+def addReply(data):
     reply=Replies(
         rpid = data['rpid'],
         oid = data['oid'],
@@ -53,10 +46,5 @@ def initReply(data):
     print("user: "+data['member']['uname'])
     print("likes: "+str(data['like']))
     print("content: "+data['content']['message'])
-    return reply
+    reply.insert()
 
-if __name__ == '__main__':
-        reply=Replies(
-            rpid=1
-        )
-        reply.insert()

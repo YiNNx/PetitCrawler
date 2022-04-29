@@ -1,18 +1,14 @@
-import os
-from flask import Flask,request
-from crawler import video_info,replies
+from flask import request
+from crawler import crawler
 import json
-
-app = Flask(__name__)
-app.config.from_json(os.path.join(os.getcwd(), "env","config","default.json"))
-
+from model.video import app
 
 @app.route('/video', methods=[ 'GET'])
 def getVideo():
     bv=request.args.get('bv')
 
-    data_v=video_info.getVideoInfo(bv)
-    _,data_c=replies.getComments(data_v["aid"])
+    data_v=crawler.getVideoInfo(bv)
+    _,data_c=crawler.getComments(data_v["aid"])
     res=initResponse(data_v,data_c)
     return json.dumps(res)
 
