@@ -1,14 +1,15 @@
-import requests
 from crawler import proxy
+from config import config
 
 url = "https://api.bilibili.com/x/space/arc/search"
 
+cookie=config.load()['cookie']
+
 headers = {
-    'cookie': '''_uuid=89749BC4-915F-26EC-7A84-58D10974DE38351277infoc; buvid3=9325CE85-DB9D-42E6-91A6-BCA74ECCB83D167634infoc; b_nut=1639830051; LIVE_BUVID=AUTO9716408611877552; rpdid=|(umJmYJmlYY0J'uYR|)YulJJ; buvid4=F5D509EC-7401-B7B0-464A-E55B636309A189874-022020801-CovTCvxmuQ/mZ1Amd1O0og==; i-wanna-go-back=-1; CURRENT_BLACKGAP=0; buvid_fp_plain=undefined; blackside_state=0; CURRENT_QUALITY=64; nostalgia_conf=-1; fingerprint=bd1f88a7f5a689fbd925a4d360d2b431; SESSDATA=5fd4e1d9,1666524290,a398b*41; bili_jct=3f66aac0fae95c86f8d0b683a727171d; DedeUserID=24340948; DedeUserID__ckMd5=7d2620def6c52431; sid=57tk8cr9; buvid_fp=bd1f88a7f5a689fbd925a4d360d2b431; b_ut=5; CURRENT_FNVAL=4048; PVID=1; bp_video_offset_24340948=653998978036138000; bsource=search_baidu; b_lsid=F5D3102510_1806EA03E85''',
+    'cookie': cookie,
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36',
     'referer': 'https://www.bilibili.com/video/BV18r4y1C7xo/?spm_id_from=333.788.recommend_more_video.0',
 }
-
 
 
 def setParams(mid,ps="50", pn="1"):

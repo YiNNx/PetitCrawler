@@ -1,10 +1,5 @@
-import os
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask
-
-app = Flask(__name__)
-app.config.from_json(os.path.join(os.getcwd(), "env","config","default.json"))
-
+from app.app import app
 
 db = SQLAlchemy(app)
 

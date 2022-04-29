@@ -30,8 +30,13 @@ def crawler():
     conf=config.load()
     aid_list,bv_list=video_list.getVideoList(conf['mid'])
     saveVideoInfo(bv_list)
+    
+    # 爬单个视频评论
     aid=input("please input aid:")
     saveRepliesByAid(aid)
+    
+    # 爬所有视频评论
+    # saveRepliesByList(aid_list)
 
 if __name__=="__main__":
     crawler()

@@ -1,8 +1,6 @@
 import os
 from flask import Flask,request
 from crawler import video_info,replies
-from model import video
-from model import reply
 import json
 
 app = Flask(__name__)
@@ -10,53 +8,43 @@ app.config.from_json(os.path.join(os.getcwd(), "env","config","default.json"))
 
 
 @app.route('/video', methods=[ 'GET'])
-def comments():
+def getVideo():
     bv=request.args.get('bv')
 
-    data=video_info.getVideoInfo(bv)
-    v=initVideo(data)
-    _,datalist=replies.getComments(v["aid"])
-    comments=[]
-    for data in datalist:
-       comments.append(initComment(data))
-    res=initResponse(v,comments)
+    data_v=video_info.getVideoInfo(bv)
+    _,data_c=replies.getComments(data_v["aid"])
+    res=initResponse(data_v,data_c)
     return json.dumps(res)
 
-def initVideo(data):
+def initResponse(data_v,data_c):
     video={
-        "bvid": data['bvid'],
-        "aid": data['aid'],
-        "pic": data['pic'],
-        "title": data['title'],
-        "pubdate": data['pubdate'],
-        "desc": data['desc'],
-        "owner": data['owner']['mid'],  # mid
-        "view": data['stat']['view'],
-        "danmaku": data['stat']['danmaku'],
-        "reply": data['stat']['reply'],
-        "favorite": data['stat']['favorite'],
-        "coin": data['stat']['coin'],
-        "share": data['stat']['share'],
-        "like": data['stat']['like'],
+        "bvid": data_v['bvid'],
+        "aid": data_v['aid'],
+        "pic": data_v['pic'],
+        "title": data_v['title'],
+        "pubdate": data_v['pubdate'],
+        "desc": data_v['desc'],
+        "owner": data_v['owner']['mid'], 
+        "view": data_v['stat']['view'],
+        "danmaku": data_v['stat']['danmaku'],
+        "reply": data_v['stat']['reply'],
+        "favorite": data_v['stat']['favorite'],
+        "coin": data_v['stat']['coin'],
+        "share": data_v['stat']['share'],
+        "like": data_v['stat']['like'],
     }
-    return video
-
-def initComment(data):
-    c={
-        "rpid": data['rpid'],
-        "oid": data['oid'],
-        "mid": data['mid'],
-        "root": data['root'],
-        "dialog": data['dialog'],
-        "rcount": data['rcount'],
-        "ctime": data['ctime'],
-        "like": data['like'],
-        "uname": data['member']['uname'],
-        "content": data['content']['message'],
-    }
-    return c
-    
-def initResponse(video,comments):
+    comments=[]
+    for c in data_c:
+        comment={
+            "rpid": c['rpid'],
+            "mid": c['mid'],
+            "uname": c['member']['uname'],
+            "content": c['content']['message'],
+            "ctime": c['ctime'],
+            "like": c['like'],
+            "rcount": c['rcount'],
+        }
+        comments.append(comment)
     res={
         "video_info":video,
         "comments":comments

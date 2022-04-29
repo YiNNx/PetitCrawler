@@ -1,7 +1,6 @@
 from app.app import app
-from config import config
-from crawler import crawler
+from crawler.crawler import crawler
 
 if __name__=='__main__':
-    app.run(debug=True) 
-    #crawler.crawler()
+    crawler()
+    app.run(debug=True)
